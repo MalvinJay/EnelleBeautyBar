@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import { Inter, Playfair_Display } from "next/font/google";
+import { Figtree, Kaushan_Script } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"], display: "swap", variable: "--font-inter" });
-const playfair = Playfair_Display({ subsets: ["latin"], display: "swap", variable: "--font-playfair-display" });
+const figtree = Figtree({ subsets: ["latin"], display: "swap", variable: "--font-figtree" });
+const kaushan = Kaushan_Script({ subsets: ["latin"], weight: "400", display: "swap", variable: "--font-kaushan" });
 
 export const metadata: Metadata = {
   title: "Enelle Beauty Bar | Luxury Hair & Beauty",
@@ -11,5 +11,11 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <html lang="en" className={`${inter.variable} ${playfair.variable}`}><body className="min-h-screen overflow-x-hidden bg-cream text-charcoal antialiased">{children}</body></html>;
+  return (
+    <html lang="en" className={`${figtree.variable} ${kaushan.variable}`}>
+      <body className="min-h-screen overflow-x-hidden bg-cream text-charcoal antialiased">
+        {children}
+      </body>
+    </html>
+  )
 }

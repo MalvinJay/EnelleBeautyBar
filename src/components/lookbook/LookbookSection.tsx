@@ -1,13 +1,13 @@
 "use client";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
-import { AnimatePresence, motion, useReducedMotion } from "motion/react";
+import { AnimatePresence, motion } from "motion/react";
 import { useEffect, useState } from "react";
 import { lookbookItems } from "@/data/lookbook";
 import { bookingMessage, createWhatsAppUrl } from "@/lib/whatsapp";
 
 export function LookbookSection() {
-  const [selected, setSelected] = useState<number | null>(null); const reduceMotion = useReducedMotion();
+  const [selected, setSelected] = useState<number | null>(null);
   const close = () => setSelected(null); const previous = () => setSelected(index => index === null ? null : (index - 1 + lookbookItems.length) % lookbookItems.length); const next = () => setSelected(index => index === null ? null : (index + 1) % lookbookItems.length);
   useEffect(() => { const onKey = (event: KeyboardEvent) => { if (event.key === "Escape") setSelected(null); if (event.key === "ArrowLeft") setSelected(index => index === null ? null : (index - 1 + lookbookItems.length) % lookbookItems.length); if (event.key === "ArrowRight") setSelected(index => index === null ? null : (index + 1) % lookbookItems.length); }; window.addEventListener("keydown", onKey); return () => window.removeEventListener("keydown", onKey); }, []);
   return <section id="lookbook" className="bg-ink px-5 py-24 text-porcelain sm:px-10 lg:px-16 lg:py-36"><div className="mx-auto max-w-[1400px]"><div className="flex items-end justify-between gap-6"><div><p className="eyebrow text-champagne">Straight from the Enelle chair</p><h2 className="mt-7 max-w-3xl font-display text-[clamp(3.3rem,6vw,6.4rem)] leading-[.87] tracking-[-.06em]">The <span className="italic text-champagne">proof</span> is in the finish.</h2></div><a href="https://www.instagram.com/enelle_beauty_bar/" target="_blank" rel="noreferrer" className="hidden border-b border-champagne pb-2 text-[10px] font-bold uppercase tracking-[.15em] text-champagne transition hover:text-porcelain md:block">See more on Instagram</a></div>

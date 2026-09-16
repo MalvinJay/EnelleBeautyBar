@@ -14,8 +14,8 @@
   --color-cream: #f7f2eb;
   --color-charcoal: #1b1520;
   --color-gold: #d4ad75;
-  --font-sans: var(--font-inter);
-  --font-display: var(--font-playfair-display), Georgia, serif;
+  --font-sans: var(--font-figtree);
+  --font-display: var(--font-kaushan), cursive;
 }
 
 html { scroll-behavior: smooth; }
@@ -23,7 +23,7 @@ html { scroll-behavior: smooth; }
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-inter), Arial, Helvetica, sans-serif;
+  font-family: var(--font-figtree), Arial, Helvetica, sans-serif;
 }
 
 ::selection { background: #4c1e38; color: #f7f2eb; }
@@ -35,4 +35,27 @@ a:focus-visible, button:focus-visible { outline: 2px solid #d4ad75; outline-offs
 
 @media (prefers-reduced-motion: reduce) {
   *, ::before, ::after { scroll-behavior: auto !important; animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+
+.hero-curve {
+  position: absolute;
+  inset: auto -1px -1px;
+  /* height: clamp(48px, 7vw, 112px); */
+  width: 100%;
+  /* background: var(--background); */
+  /* clip-path: polygon(0 58%, 11% 76%, 27% 83%, 43% 72%, 59% 34%, 74% 26%, 88% 49%, 100% 9%, 100% 100%, 0 100%); */
+  /* clip-path: ellipse(130vw 100vw at 50vw 100vw); */
+  /* clip-path: polygon("M0,64 C240,120 480,8 720,40 C960,72 1200,120 1440,72 L1440,120 L0,120 Z"); */
+}
+
+@keyframes loader-dismiss {
+  to { opacity: 0; pointer-events: none; transform: translateY(-105%); }
+}
+
+.page-loader {
+  animation: loader-dismiss .72s cubic-bezier(.76, 0, .24, 1) 1.35s forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-loader { animation: none; display: none; }
 }
