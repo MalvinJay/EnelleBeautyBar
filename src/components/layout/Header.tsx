@@ -6,11 +6,15 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 
 const links = [
-  { href: "#services", label: "Services" },
-  { href: "#lookbook", label: "Lookbook" },
-  { href: "#gallery", label: "Gallery" },
-  { href: "#about", label: "About" },
+  { href: "/#services", label: "Services" },
+  { href: "/#lookbook", label: "Lookbook" },
+  { href: "/#gallery", label: "Gallery" },
+  { href: "/#reviews", label: "Reviews" },
+  { href: "/#faq", label: "FAQ" },
+  { href: "/#location", label: "Location" },
+  { href: "/products", label: "Products" },
 ];
+
 
 export function Header() {
     const [open, setOpen] = useState(false);

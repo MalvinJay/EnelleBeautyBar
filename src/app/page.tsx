@@ -5,14 +5,16 @@ import { BrandIntro } from "@/components/brand/BrandIntro";
 import { ServicesSection } from "@/components/services/ServicesSection";
 import { LookbookSection } from "@/components/lookbook/LookbookSection";
 import { GallerySection } from "@/components/gallery/GallerySection";
+import { InstagramSection } from "@/components/social/InstagramSection";
+import { TestimonialsSection } from "@/components/testimonials/TestimonialsSection";
+import { FaqSection } from "@/components/faq/FaqSection";
+import { LocationSection } from "@/components/location/LocationSection";
 import { BookingCta } from "@/components/booking/BookingCta";
 import { Footer } from "@/components/layout/Footer";
-// import { PageLoader } from "@/components/layout/PageLoader";
 
 export default function HomePage() {
   return (
     <>
-      {/* <PageLoader /> */}
       <Header />
       <main>
         <Hero />
@@ -20,6 +22,10 @@ export default function HomePage() {
         <ServicesSection />
         <LookbookSection />
         <GallerySection />
+        <InstagramSection />
+        <TestimonialsSection />
+        <FaqSection />
+        <LocationSection />
         <BookingCta />
       </main>
       <Footer />
@@ -27,3 +33,5 @@ export default function HomePage() {
     </>
   );
 }
+
+
