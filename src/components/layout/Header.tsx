@@ -5,7 +5,12 @@ import { bookingMessage, createWhatsAppUrl } from "@/lib/whatsapp";
 import { useState, useEffect } from "react";
 import Image from "next/image";
 
-const links = [{ href: "#services", label: "Services" }, { href: "#lookbook", label: "Lookbook" }, { href: "#about", label: "About" }];
+const links = [
+  { href: "#services", label: "Services" },
+  { href: "#lookbook", label: "Lookbook" },
+  { href: "#gallery", label: "Gallery" },
+  { href: "#about", label: "About" },
+];
 
 export function Header() {
     const [open, setOpen] = useState(false);

@@ -59,3 +59,40 @@ a:focus-visible, button:focus-visible { outline: 2px solid #d4ad75; outline-offs
 @media (prefers-reduced-motion: reduce) {
   .page-loader { animation: none; display: none; }
 }
+
+/* ── Gallery masonry grid ── */
+.gallery-grid {
+  columns: 2;
+  column-gap: 0.75rem;
+}
+
+@media (min-width: 640px) {
+  .gallery-grid { columns: 3; column-gap: 1rem; }
+}
+
+@media (min-width: 1024px) {
+  .gallery-grid { columns: 4; column-gap: 1.25rem; }
+}
+
+.gallery-item {
+  display: block;
+  width: 100%;
+  break-inside: avoid;
+  margin-bottom: 0.75rem;
+  border-radius: 0.375rem;
+  cursor: pointer;
+}
+
+@media (min-width: 640px) {
+  .gallery-item { margin-bottom: 1rem; }
+}
+
+@media (min-width: 1024px) {
+  .gallery-item { margin-bottom: 1.25rem; }
+}
+
+/* Vary aspect ratios for visual interest */
+.gallery-item { aspect-ratio: 3 / 4; }
+.gallery-item:nth-child(3n+1) { aspect-ratio: 4 / 5; }
+.gallery-item:nth-child(5n+2) { aspect-ratio: 3 / 3.5; }
+.gallery-item:nth-child(7n)   { aspect-ratio: 2 / 3; }

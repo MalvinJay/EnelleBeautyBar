@@ -8,6 +8,11 @@ const kaushan = Kaushan_Script({ subsets: ["latin"], weight: "400", display: "sw
 export const metadata: Metadata = {
   title: "Enelle Beauty Bar | Luxury Hair & Beauty",
   description: "Luxury hair and beauty installations, curated around your signature look.",
+  icons: {
+    icon: "/logo.png",
+    shortcut: "/logo.png",
+    apple: "/logo.png",
+  },
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
