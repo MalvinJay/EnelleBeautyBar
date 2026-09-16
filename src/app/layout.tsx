@@ -10,8 +10,8 @@ export const metadata: Metadata = {
   description: "Luxury frontal installs, K-Tips, Tape-Ins, and camera-ready bridal hair styling at 25 Pawpaw Street, Agbogba, North Legon, Accra, Ghana.",
   keywords: ["Enelle Beauty Bar", "Hair salon North Legon", "Frontal install Accra", "K-Tips Ghana", "Bridal hair stylist Accra", "Agbogba hair studio"],
   icons: {
-    icon: "/logo.png",
-    shortcut: "/logo.png",
+    icon: "/logo-s.png",
+    shortcut: "/logo-s.png",
     apple: "/logo.png",
   },
 };
@@ -20,7 +20,8 @@ const jsonLd = {
   "@context": "https://schema.org",
   "@type": "BeautySalon",
   "name": "Enelle Beauty Bar",
-  "image": "https://enellebeautybar.com/logo.png",
+  // "image": "https://enellebeautybar.com/hero.jpg",
+  "image": "https://enellebeautybar.vercel.app/hero.jpg",
   "telephone": "+233555062291",
   "address": {
     "@type": "PostalAddress",
