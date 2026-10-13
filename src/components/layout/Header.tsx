@@ -1,9 +1,11 @@
 "use client";
-import { Menu, X } from "lucide-react";
+import { Menu, ShoppingCart, X } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import { bookingMessage, createWhatsAppUrl } from "@/lib/whatsapp";
 import { useState, useEffect } from "react";
 import Image from "next/image";
+import Link from "next/link";
+import { useCart } from "@/components/cart/CartProvider";
 
 const links = [
   { href: "/#services", label: "Services" },
@@ -19,6 +21,7 @@ const links = [
 export function Header() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const { itemCount } = useCart();
   const close = () => setOpen(false);
 
   useEffect(() => {
@@ -56,6 +59,18 @@ export function Header() {
               {link.label}
             </a>
           ))}
+          <Link
+            href="/cart"
+            aria-label={`Shopping cart, ${itemCount} items`}
+            className="relative grid min-h-11 min-w-11 place-items-center transition hover:text-plum"
+          >
+            <ShoppingCart size={19} aria-hidden="true" />
+            {itemCount > 0 && (
+              <span className="absolute right-0 top-0 grid h-5 min-w-5 place-items-center rounded-full bg-plum px-1 text-[10px] text-porcelain">
+                {itemCount}
+              </span>
+            )}
+          </Link>
           <a
             href={createWhatsAppUrl(bookingMessage)}
             target="_blank"
@@ -91,6 +106,13 @@ export function Header() {
                 {link.label}
               </a>
             ))}
+            <Link
+              onClick={close}
+              href="/cart"
+              className="block py-3 font-display text-3xl"
+            >
+              Cart ({itemCount})
+            </Link>
             <a
               href={createWhatsAppUrl(bookingMessage)}
               target="_blank"

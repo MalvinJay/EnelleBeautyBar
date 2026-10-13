@@ -35,6 +35,10 @@ export function getCatalogCollection(slug: string): CatalogCollection | undefine
     return catalogCollections.find((collection) => collection.slug === slug);
 }
 
+export function getCatalogProductBySlug(slug: string): CatalogProduct | undefined {
+    return catalogProducts.find((product) => product.slug === slug);
+}
+
 export function searchCatalogProducts(filters: ProductFilters = {}): {
     products: CatalogProduct[];
     count: number;

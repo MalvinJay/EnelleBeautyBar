@@ -1,14 +1,32 @@
 import type { Metadata } from "next";
 import { Figtree, Kaushan_Script } from "next/font/google";
+import { CartProvider } from "@/components/cart/CartProvider";
 import "./globals.css";
 
-const figtree = Figtree({ subsets: ["latin"], display: "swap", variable: "--font-figtree" });
-const kaushan = Kaushan_Script({ subsets: ["latin"], weight: "400", display: "swap", variable: "--font-kaushan" });
+const figtree = Figtree({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-figtree",
+});
+const kaushan = Kaushan_Script({
+  subsets: ["latin"],
+  weight: "400",
+  display: "swap",
+  variable: "--font-kaushan",
+});
 
 export const metadata: Metadata = {
   title: "Enelle Beauty Bar | Luxury Hair & Beauty Salon in North Legon",
-  description: "Luxury frontal installs, K-Tips, Tape-Ins, and camera-ready bridal hair styling at 25 Pawpaw Street, Agbogba, North Legon, Accra, Ghana.",
-  keywords: ["Enelle Beauty Bar", "Hair salon North Legon", "Frontal install Accra", "K-Tips Ghana", "Bridal hair stylist Accra", "Agbogba hair studio"],
+  description:
+    "Luxury frontal installs, K-Tips, Tape-Ins, and camera-ready bridal hair styling at 25 Pawpaw Street, Agbogba, North Legon, Accra, Ghana.",
+  keywords: [
+    "Enelle Beauty Bar",
+    "Hair salon North Legon",
+    "Frontal install Accra",
+    "K-Tips Ghana",
+    "Bridal hair stylist Accra",
+    "Agbogba hair studio",
+  ],
   icons: {
     icon: "/logo-s.png",
     shortcut: "/logo-s.png",
@@ -19,39 +37,41 @@ export const metadata: Metadata = {
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "BeautySalon",
-  "name": "Enelle Beauty Bar",
+  name: "Enelle Beauty Bar",
   // "image": "https://enellebeautybar.com/hero.jpg",
-  "image": "https://enellebeautybar.vercel.app/hero.jpg",
-  "telephone": "+233555062291",
-  "address": {
+  image: "https://enellebeautybar.vercel.app/hero.jpg",
+  telephone: "+233555062291",
+  address: {
     "@type": "PostalAddress",
-    "streetAddress": "25 Pawpaw Street, Agbogba",
-    "addressLocality": "North Legon",
-    "addressRegion": "Greater Accra",
-    "addressCountry": "GH"
+    streetAddress: "25 Pawpaw Street, Agbogba",
+    addressLocality: "North Legon",
+    addressRegion: "Greater Accra",
+    addressCountry: "GH",
   },
-  "geo": {
+  geo: {
     "@type": "GeoCoordinates",
-    "latitude": 5.6792376,
-    "longitude": -0.1873117
+    latitude: 5.6792376,
+    longitude: -0.1873117,
   },
-  "openingHoursSpecification": {
+  openingHoursSpecification: {
     "@type": "OpeningHoursSpecification",
-    "dayOfWeek": [
+    dayOfWeek: [
       "Monday",
       "Tuesday",
       "Wednesday",
       "Thursday",
       "Friday",
-      "Saturday"
+      "Saturday",
     ],
-    "opens": "09:00",
-    "closes": "19:00"
+    opens: "09:00",
+    closes: "19:00",
   },
-  "priceRange": "GH₵ 250 - GH₵ 2000"
+  priceRange: "GH₵ 250 - GH₵ 2000",
 };
 
-export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+export default function RootLayout({
+  children,
+}: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" className={`${figtree.variable} ${kaushan.variable}`}>
       <head>
@@ -61,9 +81,8 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         />
       </head>
       <body className="min-h-screen overflow-x-hidden bg-cream text-charcoal antialiased">
-        {children}
+        <CartProvider>{children}</CartProvider>
       </body>
     </html>
   );
 }
-

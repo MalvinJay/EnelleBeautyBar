@@ -4,10 +4,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { ArrowUpRight, Search, SlidersHorizontal } from "lucide-react";
-import { createWhatsAppUrl } from "@/lib/whatsapp";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { FloatingBookingButton } from "@/components/layout/FloatingBookingButton";
+import { ProductPurchase } from "@/components/cart/ProductPurchase";
 import type {
   CatalogCategory,
   CatalogCollection,
@@ -15,6 +15,8 @@ import type {
 } from "@/data/catalog";
 
 type CollectionsExperienceProps = {
+  basePath?: string;
+  pageTitle?: string;
   initialCollectionSlug?: string;
   initialCollectionName?: string;
   initialFilters?: {
@@ -37,6 +39,8 @@ const currency = new Intl.NumberFormat("en-GH", {
 });
 
 export function CollectionsExperience({
+  basePath = "/collections",
+  pageTitle = "Shop collections",
   initialCollectionSlug = "",
   initialCollectionName,
   initialFilters = {},
@@ -141,13 +145,22 @@ export function CollectionsExperience({
     if (maxPrice) params.set("maxPrice", maxPrice);
     if (sort !== "featured") params.set("sort", sort);
 
-    const pathname = collection ? `/collections/${collection}` : "/collections";
+    const pathname = collection ? `/collections/${collection}` : basePath;
     const queryString = params.toString();
     const nextUrl = queryString ? `${pathname}?${queryString}` : pathname;
     if (`${window.location.pathname}${window.location.search}` !== nextUrl) {
       window.history.replaceState(null, "", nextUrl);
     }
-  }, [availability, category, collection, maxPrice, minPrice, query, sort]);
+  }, [
+    availability,
+    basePath,
+    category,
+    collection,
+    maxPrice,
+    minPrice,
+    query,
+    sort,
+  ]);
 
   function clearFilters() {
     setCollection("");
@@ -174,7 +187,7 @@ export function CollectionsExperience({
                 <SlidersHorizontal size={13} /> The Enelle Edit
               </p>
               <h1 className="mt-4 font-display text-5xl leading-[.95] text-ink sm:text-6xl lg:text-7xl">
-                {activeCollectionName ?? "Shop collections"}
+                {activeCollectionName ?? pageTitle}
                 {!activeCollectionName && (
                   <span className="italic text-plum">.</span>
                 )}
@@ -434,16 +447,7 @@ export function CollectionsExperience({
                           ? "Available"
                           : "Currently unavailable"}
                       </span>
-                      <a
-                        href={createWhatsAppUrl(
-                          `Hello Enelle Beauty Bar, I would like to ask about ${product.name}.`,
-                        )}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="inline-flex min-h-11 items-center gap-1 text-xs font-bold uppercase tracking-wider text-plum transition hover:text-ink"
-                      >
-                        Enquire <ArrowUpRight size={14} aria-hidden="true" />
-                      </a>
+                      <ProductPurchase product={product} />
                     </div>
                   </article>
                 ))}
