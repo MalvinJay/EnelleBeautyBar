@@ -59,16 +59,12 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
             <p className="mt-5 text-base leading-7 text-ink/70">
               {product.description}
             </p>
-            <p className="mt-6 text-xl font-semibold tabular-nums">
-              {product.priceLabel ? `${product.priceLabel} ` : ""}GH₵{" "}
-              {product.price.toLocaleString("en-GH")}
-            </p>
             <p className="mt-2 text-xs leading-5 text-ink/60">
               Sample product and pricing pending owner approval. Shipping
               details are available before checkout.
             </p>
             <div className="mt-7">
-              <ProductPurchase product={product} />
+              <ProductPurchase product={product} presentation="inline" />
             </div>
             <div className="mt-8 border-t border-ink/15 pt-5">
               <h2 className="text-xs font-bold uppercase tracking-wider">

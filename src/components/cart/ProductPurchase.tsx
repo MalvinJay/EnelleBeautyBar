@@ -11,6 +11,7 @@ import type { CatalogProduct } from "@/data/catalog";
 type ProductPurchaseProps = {
   product: CatalogProduct;
   detailsHref?: string;
+  presentation?: "modal" | "inline";
 };
 
 const money = new Intl.NumberFormat("en-GH", { maximumFractionDigits: 0 });
@@ -18,6 +19,7 @@ const money = new Intl.NumberFormat("en-GH", { maximumFractionDigits: 0 });
 export function ProductPurchase({
   product,
   detailsHref = `/products/${product.slug}`,
+  presentation = "modal",
 }: ProductPurchaseProps) {
   const router = useRouter();
   const { addItem } = useCart();
@@ -78,6 +80,137 @@ export function ProductPurchase({
       return;
     }
     setNotice("Added to your cart.");
+  }
+
+  if (presentation === "inline") {
+    return (
+      <div className="space-y-6">
+        <div>
+          <p className="text-xl font-semibold tabular-nums">
+            {product.priceLabel ? `${product.priceLabel} ` : ""}GH₵{" "}
+            {money.format(price)}
+          </p>
+          <Link
+            href="/shipping"
+            className="mt-2 inline-block border-b border-ink/40 pb-0.5 text-xs text-ink/70 hover:text-plum"
+          >
+            Shipping details
+          </Link>
+        </div>
+
+        {product.variants && (
+          <fieldset>
+            <legend className="text-xs font-bold uppercase tracking-wider">
+              {product.variantOptionName ?? "Length"}{" "}
+              <span className="font-normal normal-case tracking-normal text-ink/60">
+                {selectedVariant
+                  ? `(${selectedVariant.label})`
+                  : "(select one)"}
+              </span>
+            </legend>
+            <div className="mt-3 flex flex-wrap gap-2">
+              {product.variants.map((variant) => (
+                <button
+                  key={variant.id}
+                  type="button"
+                  onClick={() => {
+                    setVariantId(variant.id);
+                    setQuantity(1);
+                    setNotice("");
+                  }}
+                  disabled={variant.stockCount === 0}
+                  aria-pressed={variantId === variant.id}
+                  className={`min-h-11 min-w-14 border px-3 text-sm transition disabled:cursor-not-allowed disabled:opacity-40 ${variantId === variant.id ? "border-plum bg-plum text-porcelain" : "border-ink/20 hover:border-plum"}`}
+                >
+                  {variant.label}
+                  {variant.stockCount === 0 ? " · Sold out" : ""}
+                </button>
+              ))}
+            </div>
+          </fieldset>
+        )}
+
+        <div className="flex items-end justify-between gap-4">
+          <div>
+            <p className="text-xs font-bold uppercase tracking-wider">
+              Quantity
+            </p>
+            <div className="mt-2 inline-flex h-11 items-center border border-ink/25">
+              <button
+                type="button"
+                onClick={() => setQuantity((value) => Math.max(1, value - 1))}
+                disabled={quantity <= 1}
+                aria-label="Decrease quantity"
+                className="grid h-11 w-11 place-items-center disabled:opacity-35"
+              >
+                <Minus size={16} aria-hidden="true" />
+              </button>
+              <output
+                aria-label="Quantity"
+                className="w-10 text-center text-sm tabular-nums"
+              >
+                {quantity}
+              </output>
+              <button
+                type="button"
+                onClick={() =>
+                  setQuantity((value) => Math.min(stockCount, value + 1))
+                }
+                disabled={!available || quantity >= stockCount}
+                aria-label="Increase quantity"
+                className="grid h-11 w-11 place-items-center disabled:opacity-35"
+              >
+                <Plus size={16} aria-hidden="true" />
+              </button>
+            </div>
+          </div>
+          <p
+            className={`pb-1 text-xs ${available ? "text-ink/65" : "font-semibold text-plum"}`}
+            aria-live="polite"
+          >
+            {available
+              ? `${stockCount} in sample stock`
+              : "Currently unavailable"}
+          </p>
+        </div>
+
+        <p className="text-[11px] leading-5 text-ink/55">
+          Inventory shown is placeholder data and will be replaced with approved
+          stock.
+        </p>
+        {notice && (
+          <p role="status" className="text-sm font-medium text-plum">
+            {notice}
+            {notice === "Added to your cart." && (
+              <>
+                {" "}
+                <Link href="/cart" className="underline underline-offset-4">
+                  View cart
+                </Link>
+              </>
+            )}
+          </p>
+        )}
+        <div className="grid gap-2 sm:grid-cols-2">
+          <button
+            type="button"
+            onClick={() => addToCart()}
+            disabled={!available}
+            className="min-h-12 bg-plum px-4 text-xs font-bold uppercase tracking-wider text-porcelain transition hover:bg-ink disabled:cursor-not-allowed disabled:opacity-45"
+          >
+            Add to cart
+          </button>
+          <button
+            type="button"
+            onClick={() => addToCart(true)}
+            disabled={!available}
+            className="min-h-12 border border-ink/30 px-4 text-xs font-bold uppercase tracking-wider transition hover:border-plum hover:text-plum disabled:cursor-not-allowed disabled:opacity-45"
+          >
+            Buy it now
+          </button>
+        </div>
+      </div>
+    );
   }
 
   return (
@@ -147,7 +280,7 @@ export function ProductPurchase({
               {product.variants && (
                 <fieldset className="mt-6">
                   <legend className="text-xs font-bold uppercase tracking-wider">
-                    Length{" "}
+                    {product.variantOptionName ?? "Length"}{" "}
                     <span className="font-normal normal-case tracking-normal text-ink/60">
                       {selectedVariant
                         ? `(${selectedVariant.label})`

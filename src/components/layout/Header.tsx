@@ -8,14 +8,13 @@ import Link from "next/link";
 import { useCart } from "@/components/cart/CartProvider";
 
 const links = [
-  { href: "/#services", label: "Services" },
-  { href: "/#lookbook", label: "Lookbook" },
-  { href: "/#gallery", label: "Gallery" },
-  { href: "/#reviews", label: "Reviews" },
-  { href: "/#faq", label: "FAQ" },
-  { href: "/#location", label: "Location" },
-  { href: "/collections", label: "Collections" },
-  { href: "/products", label: "Products" },
+  { href: "/", label: "Home" },
+  { href: "/collections", label: "Shop by collection" },
+  { href: "/products", label: "Shop All" },
+  { href: "/products?sort=newest", label: "New Arrivals" },
+  { href: "/services", label: "Services" },
+  { href: "/contact", label: "Contact Us" },
+  { href: "/#faq", label: "FAQs" },
 ];
 
 export function Header() {
@@ -49,15 +48,15 @@ export function Header() {
             priority
           />
         </a>
-        <nav className="hidden items-center gap-7 text-[11px] font-semibold md:flex">
+        <nav className="hidden items-center gap-7 text-[11px] font-semibold lg:flex">
           {links.map((link) => (
-            <a
+            <Link
               key={link.href}
               href={link.href}
               className="transition hover:text-plum"
             >
               {link.label}
-            </a>
+            </Link>
           ))}
           <Link
             href="/cart"
@@ -83,7 +82,7 @@ export function Header() {
         <button
           onClick={() => setOpen(!open)}
           aria-label={open ? "Close menu" : "Open menu"}
-          className="grid min-h-11 min-w-11 place-items-center md:hidden"
+          className="grid min-h-11 min-w-11 place-items-center lg:hidden"
         >
           {open ? <X /> : <Menu />}
         </button>
@@ -94,17 +93,17 @@ export function Header() {
             initial={{ opacity: 0, y: -12 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -12 }}
-            className="mx-auto max-w-[1480px] bg-porcelain px-5 pb-7 pt-2 text-ink shadow-[0_16px_30px_rgba(41,22,17,.08)] sm:px-7 md:hidden"
+            className="mx-auto max-w-[1480px] bg-porcelain px-5 pb-7 pt-2 text-ink shadow-[0_16px_30px_rgba(41,22,17,.08)] sm:px-7 lg:hidden"
           >
             {links.map((link) => (
-              <a
+              <Link
                 onClick={close}
                 key={link.href}
                 href={link.href}
                 className="block py-3 font-display text-3xl"
               >
                 {link.label}
-              </a>
+              </Link>
             ))}
             <Link
               onClick={close}

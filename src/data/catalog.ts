@@ -33,6 +33,7 @@ export type CatalogProduct = {
     availability: "in-stock" | "out-of-stock";
     stockCount: number;
     variants?: CatalogVariant[];
+    variantOptionName?: string;
     featured: boolean;
     bestSeller: boolean;
     popularity: number;
@@ -118,6 +119,7 @@ export const catalogProducts: CatalogProduct[] = [
             { id: "14-inch", label: '14"', price: 3000, stockCount: 0 },
             { id: "16-inch", label: '16"', price: 3200, stockCount: 0 },
         ],
+        variantOptionName: "Length",
         featured: true,
         bestSeller: true, popularity: 92, createdAt: "2026-10-10", tags: ["custom", "wig", "frontal"],
     },
