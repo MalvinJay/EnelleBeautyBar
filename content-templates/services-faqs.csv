@@ -1,0 +1,5 @@
+Type,Name,Category,Price,Description,Duration,Image,Featured,Question,Answer,Published
+Service,Signature Hair Consultation,Consultation,60,Personalised guidance on hair texture, maintenance, and best-fit products.,45 min,consultation.jpg,Yes,,,,
+Service,Maintenance Styling Session,Styling,80,Maintenance styling and finishing guidance to keep your look polished.,60 min,styling.jpg,No,,,,
+FAQ,How do I choose the right hair texture?,Buying Guide,,Choose a texture that matches your natural density, styling preferences, and maintenance routine.,,,What is the best hair texture for me?,Choose based on your natural hair pattern, how much styling you want, and how much maintenance you are prepared for.,Yes
+FAQ,Do you offer advice for installing products?,Support,,Yes, our team can guide you on texture, fit, and styling support.,,,Can I get product recommendations?,Yes. We can recommend products and textures based on your goals and maintenance routine.,Yes
